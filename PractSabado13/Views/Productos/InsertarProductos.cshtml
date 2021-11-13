@@ -1,0 +1,112 @@
+﻿@model IEnumerable<PractSabado13.Models.Productos>
+
+@{
+    ViewBag.Title = "InsertarProductos";
+}
+
+
+<div class="container">
+    <h2> Ingreso de produccion </h2>
+    <hr />
+    <div class="row">
+        @using (Html.BeginForm("Insert", "Productos", FormMethod.Post))
+        {
+            <div class="col-lg-12">
+                <div class="col-md-3">
+                    @Html.Label("Fecha de Produccion")
+                </div>
+                <div class="col-md-3">
+                    @Html.Label("Categoria")
+                </div>
+                <div class="col-md-3">
+                    @Html.Label("Talla")
+                </div>
+                <div class="col-md-2">
+                    @Html.Label("Color")
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-md-3">
+                    @Html.TextBox("FechaProduc", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @{
+                        IEnumerable<string> strCat = new List<string> { "Ropa deportiva", "Ropa informal", "Ropa de abrigo", "Ropa de trabajo" };
+                    }
+                    @Html.DropDownList("Categoria", new SelectList(strCat, strCat.FirstOrDefault()))
+                </div>
+                <div class="col-md-3">
+                    @{
+                        IEnumerable<string> strList = new List<string> { "M", "S", "XL" };
+                    }
+                    @Html.DropDownList("Talla", new SelectList(strList, strList.FirstOrDefault()))
+                </div>
+                <div class="col-md-3">
+                    @{
+                        IEnumerable<string> ColorList = new List<string> { "Blanco", "Amarillo", "Azul", "Negro", "Rojo" };
+                    }
+                    @Html.DropDownList("Color", new SelectList(ColorList, ColorList.FirstOrDefault()))
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-md-3">
+                    @Html.Label("Descripcion")
+                </div>
+                <div class="col-md-3">
+                    @Html.Label("Cantidad")
+                </div>
+                <div class="col-md-3">
+                    @Html.Label("")
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-md-3">
+                    @Html.TextArea("Descripcion", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBox("Cantidad", "", new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Success" class="form-control btn btn-success" />
+                </div>
+            </div>
+            <div class="col-lg-12"></div>
+            <div class="col-lg-12"></div>
+            <div class="col-lg-12"></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> #</th>
+                                <th> Categoria </th>
+                                <th> Talla </th>
+                                <th> Color </th>
+                                <th> Descripcion </th>
+                                <th> Cantidad </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.id_producto) </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Categoria) </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Color) </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Talla) </td>
+                                    <td>@Html.DisplayFor(modelitem => item.Descripcion) </td>
+                                    <td>@Html.DisplayFor(modelitem => item.Cantidad) </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.id_producto }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.id_producto })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>
